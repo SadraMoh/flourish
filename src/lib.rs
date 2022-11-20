@@ -1,2 +1,2 @@
-pub mod scroll;
-pub mod task;
+pub mod shared;
+pub mod components;

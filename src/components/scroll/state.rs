@@ -1,6 +1,6 @@
-use druid::{Data, im::Vector, Lens};
+use druid::{Data, im::Vector, Lens, widget::ListIter};
 
-use crate::task::TaskState;
+use crate::components::task::TaskState;
 
 #[derive(Clone, Data, Lens, Default)]
 pub struct ScrollState {
