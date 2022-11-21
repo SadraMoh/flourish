@@ -23,10 +23,10 @@ pub fn build_home() -> impl Widget<AppState> {
     //     .lens(AppState::scrolls);
 
     // list of scrolls
-    let mut scrolls = List::<ScrollState>::new(build_scroll).horizontal();
-    scrolls.set_spacing(KeyOrValue::Concrete(XL));
-    let scrolls = scrolls.lens(AppState::scrolls);
-
+    let mut scrolls = List::<ScrollState>::new(build_scroll)
+        .horizontal()
+        .with_spacing(KeyOrValue::Concrete(XL))
+        .lens(AppState::scrolls);
 
     template.add_child(scrolls);
     template.add_child(button);

@@ -23,3 +23,5 @@ pub const LABEL_GREEN: Color = Color::rgb8(14, 218, 108);
 pub const LABEL_ORANGE: Color = Color::rgb8(216, 112, 14);
 
 pub const BORDER_COLOR: Color = Color::rgb8(70, 75, 85);
+
+pub const PRIMARY: Color = Color::rgb8(128, 124, 254);

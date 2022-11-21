@@ -2,6 +2,7 @@ use druid::{AppLauncher, Color, PlatformError, Widget, WidgetExt, WindowDesc};
 
 use flourish::components::home::build_home;
 use flourish::shared::app_state::AppState;
+use flourish::shared::styles::BORDER_COLOR;
 
 fn main() -> Result<(), PlatformError> {
     let data = AppState::default();
@@ -13,5 +14,5 @@ fn main() -> Result<(), PlatformError> {
 }
 
 fn build_ui() -> impl Widget<AppState> {
-    build_home().border(Color::RED, 1.)
+    build_home().border(BORDER_COLOR, 1.)
 }
