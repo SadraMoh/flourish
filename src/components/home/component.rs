@@ -1,11 +1,10 @@
 use druid::im::Vector;
-use druid::widget::{Button, Flex, List};
-use druid::{Widget, WidgetExt};
+use druid::widget::{Button, CrossAxisAlignment, Flex, List};
+use druid::{KeyOrValue, Widget, WidgetExt};
 
 use crate::components::scroll::{build_scroll, ScrollState};
-use crate::components::task::TaskState;
 use crate::shared::app_state::AppState;
-use crate::shared::styles::LIST_WIDTH;
+use crate::shared::styles::XL;
 
 pub fn build_home() -> impl Widget<AppState> {
     let mut template = Flex::row();
@@ -24,12 +23,16 @@ pub fn build_home() -> impl Widget<AppState> {
     //     .lens(AppState::scrolls);
 
     // list of scrolls
-    let scrolls = List::<ScrollState>::new(build_scroll)
-        .horizontal()
-        .lens(AppState::scrolls);
+    let mut scrolls = List::<ScrollState>::new(build_scroll).horizontal();
+    scrolls.set_spacing(KeyOrValue::Concrete(XL));
+    let scrolls = scrolls.lens(AppState::scrolls);
+
 
     template.add_child(scrolls);
     template.add_child(button);
 
     template
+        .cross_axis_alignment(CrossAxisAlignment::Start)
+        .expand()
+        .padding(XL)
 }
