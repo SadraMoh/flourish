@@ -1,14 +1,16 @@
 use druid::{
     self,
-    piet::RoundInto,
-    widget::{Button, Either, Flex, Label, TextBox},
-    widget::{List, Painter},
-    Color, KeyOrValue, RenderContext, Widget, WidgetExt,
+    widget::List,
+    widget::{Either, Flex, Label, TextBox},
+    Color, Widget, WidgetExt, TextAlignment,
 };
 
 use super::ScrollState;
 use crate::{
-    components::task::{build_task, TaskState},
+    components::{
+        core::util::interactive_bg,
+        task::{build_task, TaskState},
+    },
     shared::styles::{
         BORDER_COLOR, BORDER_RADIUS, CARD_BACKGROUND, PRIMARY, SM, TEXTBOX_BACKGROUND, XS,
     },
@@ -36,21 +38,6 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         .fix_height(HEAD_HEIGHT)
         .align_left();
 
-    let painter = Painter::new(|ctx, _, env| {
-        let bounds = ctx.size().to_rect();
-
-        ctx.fill(bounds, &PRIMARY);
-
-        if ctx.is_hot() {
-            // ctx.stroke(bounds.inset(-0.5), &Color::WHITE, 1.0);
-            ctx.fill(bounds, &Color::RED);
-        }
-
-        if ctx.is_active() {
-            ctx.fill(bounds, &Color::GRAY);
-        }
-    });
-
     // label-editor
     let label_editor = Flex::row()
         .with_flex_child(
@@ -64,7 +51,7 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         .with_spacer(XS)
         .with_child(
             Label::new("✓")
-                .background(painter)
+                .background(interactive_bg(PRIMARY, Color::RED, Color::BLUE))
                 .rounded(8.)
                 .on_click(|_ctx, data: &mut ScrollState, _env| data.is_editing_name = false)
                 .fix_size(24., 24.),
