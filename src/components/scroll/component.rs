@@ -2,7 +2,7 @@ use druid::{
     self,
     widget::List,
     widget::{Either, Flex, Label, TextBox},
-    Color, Widget, WidgetExt, TextAlignment,
+    Color, Insets, TextAlignment, Widget, WidgetExt,
 };
 
 use super::ScrollState;
@@ -12,11 +12,10 @@ use crate::{
         task::{build_task, TaskState},
     },
     shared::styles::{
-        BORDER_COLOR, BORDER_RADIUS, CARD_BACKGROUND, PRIMARY, SM, TEXTBOX_BACKGROUND, XS,
+        ACTIVE, BORDER_COLOR, BORDER_RADIUS, CARD_BACKGROUND, HIGHLIGHT, PRIMARY, SCROLL_WIDTH, SM,
+        TEXTBOX_BACKGROUND, TRANSPARENT, XS,
     },
 };
-
-use crate::shared::styles::LIST_WIDTH;
 
 pub fn build_scroll() -> impl Widget<ScrollState> {
     let mut template = Flex::column();
@@ -30,10 +29,13 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         //     .background(Color::rgb(0.5, 0.5, 0.5))
         .lens(ScrollState::tasks);
 
-    const HEAD_HEIGHT: f64 = 24.;
+    const HEAD_HEIGHT: f64 = 28.;
 
     // label
     let label = Label::new(|scroll: &ScrollState, _env: &_| scroll.name.clone())
+        .padding((4., 4.))
+        .background(interactive_bg(TRANSPARENT, HIGHLIGHT, ACTIVE))
+        .rounded(4.)
         .on_click(|_ctx, data: &mut ScrollState, _env| data.is_editing_name = true)
         .fix_height(HEAD_HEIGHT)
         .align_left();
@@ -43,7 +45,6 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         .with_flex_child(
             TextBox::new()
                 .lens(ScrollState::name)
-                .background(TEXTBOX_BACKGROUND)
                 .fix_height(HEAD_HEIGHT)
                 .expand_width(),
             1.,
@@ -70,7 +71,7 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
     template.add_child(tasks);
 
     template
-        .fix_width(LIST_WIDTH)
+        .fix_width(SCROLL_WIDTH)
         .background(CARD_BACKGROUND)
         .border(BORDER_COLOR, 2.)
         .rounded(BORDER_RADIUS)
