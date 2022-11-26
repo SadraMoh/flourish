@@ -1,4 +1,6 @@
-use druid::{Color, image::imageops::colorops};
+use std::sync::Arc;
+
+use druid::{Color, widget::{SvgData, Svg}};
 
 pub const XS: f64 = 4.;
 pub const SM: f64 = 8.;
@@ -13,8 +15,6 @@ pub const BORDER_RADIUS: f64 = 6.;
 
 pub const CARD_BACKGROUND: Color = Color::rgb8(50, 55, 65);
 pub const CARD_HEADER: Color = Color::rgb8(50, 55, 65);
-
-pub const TEXTBOX_BACKGROUND: Color = Color::rgb8(42, 45, 53);
 
 pub const LABEL_BLUE: Color = Color::rgba8(14, 168, 218, 64);
 pub const LABEL_GREEN: Color = Color::rgb8(14, 218, 108);

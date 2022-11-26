@@ -1,6 +1,6 @@
 use druid::{
     self,
-    widget::List,
+    widget::{List, Svg, SvgData},
     widget::{Either, Flex, Label, TextBox},
     Color, Insets, TextAlignment, Widget, WidgetExt,
 };
@@ -13,7 +13,7 @@ use crate::{
     },
     shared::styles::{
         ACTIVE, BORDER_COLOR, BORDER_RADIUS, CARD_BACKGROUND, HIGHLIGHT, PRIMARY, SCROLL_WIDTH, SM,
-        TEXTBOX_BACKGROUND, TRANSPARENT, XS,
+        TRANSPARENT, XS,
     },
 };
 
@@ -29,7 +29,7 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         //     .background(Color::rgb(0.5, 0.5, 0.5))
         .lens(ScrollState::tasks);
 
-    const HEAD_HEIGHT: f64 = 28.;
+    const HEAD_HEIGHT: f64 = 24.;
 
     // label
     let label = Label::new(|scroll: &ScrollState, _env: &_| scroll.name.clone())
@@ -51,7 +51,7 @@ pub fn build_scroll() -> impl Widget<ScrollState> {
         )
         .with_spacer(XS)
         .with_child(
-            Label::new("✓")
+            Svg::new(include_str!("./assets/done.svg").parse::<SvgData>().unwrap())
                 .background(interactive_bg(PRIMARY, Color::RED, Color::BLUE))
                 .rounded(8.)
                 .on_click(|_ctx, data: &mut ScrollState, _env| data.is_editing_name = false)
