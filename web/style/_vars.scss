@@ -1,0 +1,52 @@
+@import "./utility";
+
+//- layout
+
+$content-height: 512px;
+$content-width: 380px;
+
+$header-height: 32px;
+$footer-height: 32px;
+
+$xs: 324px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+$p-xs: 4px;
+$p-sm: 8px;
+$p-md: 12px;
+$p-lg: 16px;
+$p-xlg: 24px;
+
+$m-xs: 4px;
+$m-sm: 8px;
+$m-md: 12px;
+$m-lg: 16px;
+$m-xlg: 24px;
+
+
+//- Colors
+
+$bg: #23242A;
+
+$text: #696969;
+
+$primary: #D85DF4;
+
+$red: #E81123;
+$green: #98e730;
+$yellow: #f5e65e;
+
+$control: #FAFAFA;
+$control-label: #858585;
+$control-text: #707070;
+
+$card: #2F313A;
+$card-shadow: 0 4px 8px transparentize(#000000, .75);
+
+$border-color: #474A55;
+$border-radius: 12px;
+$border: 1px solid $border-color;

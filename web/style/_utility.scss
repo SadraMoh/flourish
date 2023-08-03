@@ -1,0 +1,257 @@
+//- Utility
+
+// ------ { Flex Layout } ------
+
+@mixin flex(
+  $dir: n,
+  $alignContent: normal,
+  $justifyContent: normal,
+  $alignItems: normal,
+  $wrap: nowrap
+) {
+  display: flex;
+
+  @if $dir == r {
+    flex-direction: row;
+  }
+  @if $dir == c {
+    flex-direction: column;
+  }
+  @if $dir == rr {
+    flex-direction: row-reverse;
+  }
+  @if $dir == cr {
+    flex-direction: column-reverse;
+  }
+
+  align-content: $alignContent;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-wrap: $wrap;
+}
+
+@mixin row() {
+  @include flex($dir: r);
+}
+
+@mixin col() {
+  @include flex($dir: c);
+}
+
+@mixin rowr() {
+  @include flex($dir: rr);
+}
+
+@mixin colr() {
+  @include flex($dir: cr);
+}
+
+.row {
+  @include row;
+}
+
+.rowr {
+  @include rowr;
+}
+
+.col {
+  @include col;
+}
+
+.colr {
+  @include colr;
+}
+
+
+// ------ { Responsive } ------
+
+@mixin screen-min($min) {
+  @media (min-width: ($min)) {
+    @content;
+  }
+}
+@mixin screen-max($max) {
+  @media (max-width: ($max)) {
+    @content;
+  }
+}
+
+
+@mixin screen-xs-min {
+  @media (min-width: ($xs + 1px)) {
+    @content;
+  }
+}
+@mixin screen-xs {
+  @media (max-width: $xs) {
+    @content;
+  }
+}
+
+@mixin screen-sm-min {
+  @media (min-width: ($sm + 1px)) {
+    @content;
+  }
+}
+@mixin screen-sm {
+  @media (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin screen-md-min {
+  @media (min-width: ($md + 1px)) {
+    @content;
+  }
+}
+@mixin screen-md {
+  @media (max-width: $md) {
+    @content;
+  }
+}
+
+@mixin screen-lg-min {
+  @media (min-width: ($lg + 1px)) {
+    @content;
+  }
+}
+@mixin screen-lg {
+  @media (max-width: $lg) {
+    @content;
+  }
+}
+
+@mixin screen-xl-min {
+  @media (min-width: ($xl + 1px)) {
+    @content;
+  }
+}
+@mixin screen-xl {
+  @media (max-width: $xl) {
+    @content;
+  }
+}
+
+@mixin screen-xxl-min {
+  @media (min-width: ($xxl + 1px)) {
+    @content;
+  }
+}
+@mixin screen-xxl {
+  @media (max-width: $xxl) {
+    @content;
+  }
+}
+
+
+// ------ { Misc } ------
+
+@mixin trans($seconds: 0.2s) {
+  transition: all ease $seconds;
+}
+
+@mixin transl() {
+  @include trans(0.32s);
+}
+
+@mixin transs {
+  @include trans(0.08s);
+}
+
+@mixin circle() {
+  border-radius: 5000px;
+}
+
+.circle {
+  @include circle();
+}
+
+@mixin grad($from, $to, $deg: 250) {
+  background: $from;
+  background: -moz-linear-gradient(#{$deg}deg, $from 0%, $to 100%);
+  background: -webkit-linear-gradient(#{$deg}deg, $from 0%, $to 100%);
+  background: linear-gradient(#{$deg}deg, $from 0%, $to 100%);
+}
+
+@mixin maxlines($line: 3) {
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+@mixin maxlinewidth($width: 228px) {
+  max-width: $width;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin grid($width: 220px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($width, 1fr));
+}
+
+@mixin noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+@mixin noscroll() {
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
+
+.noscroll {
+  @include noscroll();
+}
+
+@mixin placeholder($color) {
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $color;
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $color;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $color;
+  }
+}
+
+@mixin scrollbar() {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
